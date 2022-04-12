@@ -1,5 +1,5 @@
-@include('layouts.clothesfilter')
-@include('layouts.clothes')
+@include('products.products')
+@include('products.productsfilter')
 @extends('layouts.app')
 
 @section('content')
@@ -21,10 +21,10 @@
             </div>
         </div>
         <div class="row">
-            @yield('clothesfilter')
+            @yield('productsfilter')
         </div>
         <div class="row">
-            @yield('clothes')
+            @yield('products')
         </div>
     </div>
 </div>
