@@ -1,5 +1,3 @@
-@include('products.products')
-@include('products.productsfilter')
 @extends('layouts.app')
 
 @section('content')
@@ -18,13 +16,11 @@
 
                     {{ __('You are logged in!') }}
                 </div>
+                <div class="card-footer">
+                    <a href="{{route('products')}}">Want to newly launched products?</a>
+                </div>
             </div>
-        </div>
-        <div class="row">
-            @yield('productsfilter')
-        </div>
-        <div class="row">
-            @yield('products')
+            
         </div>
     </div>
 </div>

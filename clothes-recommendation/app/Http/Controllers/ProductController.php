@@ -36,4 +36,20 @@ class ProductController extends Controller
         $colors = Product::select('color')->distinct()->get();
         return view('products.products', compact('products', 'filters', 'sizes', 'colors'));
     }
+
+    public function sorthightolow(){
+        $products = DB::table('products')->orderBy('selling_price', 'desc')->get();
+        $filters = Product::select('name', 'type')->distinct('type')->get();
+        $sizes = Product::select('size')->distinct()->get();
+        $colors = Product::select('color')->distinct()->get();
+        return view('products.products', compact('products', 'filters', 'sizes', 'colors'));
+    }
+
+    public function sortlowtohigh(){
+        $products = DB::table('products')->orderBy('selling_price', 'asc')->get();
+        $filters = Product::select('name', 'type')->distinct('type')->get();
+        $sizes = Product::select('size')->distinct()->get();
+        $colors = Product::select('color')->distinct()->get();
+        return view('products.products', compact('products', 'filters', 'sizes', 'colors'));
+    }
 }

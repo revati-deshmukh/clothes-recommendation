@@ -21,6 +21,10 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::resource('products', App\Http\Controllers\ProductController::class);
+Route::get('products', [App\Http\Controllers\ProductController::class, 'index'])->name('products');
 
 Route::post('products/filterproducts', [App\Http\Controllers\ProductController::class, 'filterproducts'])->name('filterproducts');
+
+Route::get('products/sortfeatured', [App\Http\Controllers\ProductController::class, 'index'])->name('sortproducts');
+Route::get('products/sortlowtohigh', [App\Http\Controllers\ProductController::class, 'sortlowtohigh'])->name('sortlowtohigh');
+Route::get('products/sorthightolow', [App\Http\Controllers\ProductController::class, 'sorthightolow'])->name('sorthightolow');

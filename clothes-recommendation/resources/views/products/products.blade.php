@@ -10,25 +10,37 @@
       flex-grow: 1;
     }
 
-    .sort {
+    .filter-section {
       display: flex;
     }
 
-    .collection-sort {
+    .sort {
       display: flex;
-      flex-direction: column;
+      flex-direction: row;
+      float: right;
+    }
+
+    .collection-sort {
+      /*display: flex; */
+      flex-direction: row;
     }
 
     .collection-sort label {
       font-size: large;
       color: #5e5151;
+      margin-top: 10px;
+      margin-right: 10px;
+    }
+
+    .collection-sort a {
+      font-size: 0.75rem;
     }
 
     .products {
       display: flex;
       flex-wrap: wrap;
       justify-content: space-between;
-      margin-top: 2rem;
+      margin-top: 4rem;
     }
 
     .product-card {
@@ -54,9 +66,9 @@
     }
 
     .product-image img {
-      margin-top: auto;
-      margin-bottom:auto;
       max-width: 100%;
+      height: 350px;
+      width: 100%;
     }
 
     .product-image img:hover {
@@ -82,13 +94,6 @@
 
     #toggleFilterBtn {
       background-color: #89af4c; /* Green */
-      border: none;
-      color: white;
-      padding: 15px 32px;
-      text-align: center;
-      text-decoration: none;
-      display: inline-block;
-      font-size: 16px;
     }
 
     input[type=number], select {
@@ -110,7 +115,7 @@
     }
 
     #applyFilter {
-      background-color: #89af4c; /* Green */
+      background-color: #89af4c; /*#c19d11; /* Green */
       border: none;
       color: white;
       padding: 15px 32px;
@@ -120,6 +125,9 @@
       font-size: 16px;
     }
 
+    #featured {
+
+    }
 </style>
 
 @extends('layouts.app')
@@ -149,55 +157,63 @@
 
 @section('content')
 <div class="container">
-    <nav class="product-filter">
-        <h1>Clothes</h1>
-        <div class="sort">
-            <button id="toggleFilterBtn" onclick=toggleFilters()>Apply Filters?</button>
+    <div class="product-filter">
+        <h1>Clothes</h1>       
+        <div class="filter-section">
+            <button class="btn btn-success" id="toggleFilterBtn" onclick=toggleFilters()>Apply Filters?</button>
             <div id="filter" class="collection-sort">
                 <label>Filter by:</label>
                 <form action="{{route('filterproducts')}}" method="POST">
                   @csrf
                   <select id="typeFilter" name="type">
-                      <option value="all">All Clothes</option>
+                      <option value="/">Type</option>
+                      <option value="all">All</option>
                       @foreach($filters as $filter)
                         <option value="{{$filter->type}}">{{$filter->name}}</option>
                       @endforeach
                   </select>
-                  <input id="minamount" type="number" value="" name="startprice" placeholder="Min amount" />
-                  -
-                  <input id="maxamount" type="number" value="" name="endprice" placeholder="Max amount" />
+                  <select name="price">
+                      <option value="/">Price range</option>
+                      <option value="all">All</option>
+                      <option value="500">0-500</option>
+                      <option value="1000">500-1000</option>
+                      <option value="1500">1000-1500</option>
+                      <option value="2000">2000 and above</option>
+                  </select>
                   <select name="size">
-                      <option value="all">All Sizes</option>
+                      <option value="/">Size</option>
+                      <option value="all">All</option>
                       @foreach($sizes as $size)
                         <option value="{{$size->size}}">{{$size->size}}</option>
                       @endforeach
                   </select>
                   <select name="color">
-                      <option value="all">All Colors</option>
+                      <option value="/">Color</option>
+                      <option value="all">All</option>
                       @foreach($colors as $color)
                         <option value="{{$color->color}}">{{$color->color}}</option>
                       @endforeach
                   </select>
-                  <button id="applyFilter" type="submit">Filter</button>
+                  <button id="applyFilter" type="submit">Apply</button>
                 </form>
             </div>
-
-            <!-- <div class="collection-sort">
-                <label>Sort by:</label>
-                <select>
-                    <option value="/">Featured</option>
-                    <option value="/">Price Low-High</option>
-                    <option value="/">Price High-Low</option>
-                </select>
-            </div> -->
+        </div>   
+    </div>
+    <div>
+        <div class="sort">
+          <div class="collection-sort"> 
+              <a class="btn btn-light active" id="featured" href="{{ route('products') }}">Featured</a>
+              <a class="btn btn-light" id="lowhigh" href="{{ route('sortlowtohigh') }}">Price Low-High</a>
+              <a class="btn btn-light" id="highlow" href="{{ route('sorthightolow') }}">Price High-Low</a>
+          </div>
         </div>
-    </nav>
+    </div>
   
     <section class="products">
       @foreach($products as $product)
         <div class="product-card">
             <div class="product-image">
-                <img src="{{ asset('images/palazzo-top-set1.jpeg') }}" title="{{$product->name}}">
+                <img src="{{ $product->image_url }}" title="{{$product->name}}">
             </div>
             <div class="product-info">
                 <h4 class="product-name">{{ $product->name }}</h4>
