@@ -124,10 +124,6 @@
       display: inline-block;
       font-size: 16px;
     }
-
-    #featured {
-
-    }
 </style>
 
 @extends('layouts.app')
@@ -213,7 +209,9 @@
       @foreach($products as $product)
         <div class="product-card">
             <div class="product-image">
+              <a href="{{ route('productdetails', $product->id) }}">
                 <img src="{{ $product->image_url }}" title="{{$product->name}}">
+              </a>
             </div>
             <div class="product-info">
                 <h4 class="product-name">{{ $product->name }}</h4>

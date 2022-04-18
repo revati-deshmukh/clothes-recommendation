@@ -22,6 +22,7 @@ Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::get('products', [App\Http\Controllers\ProductController::class, 'index'])->name('products');
+Route::get('products/{id}', [App\Http\Controllers\ProductController::class, 'productdetails'])->name('productdetails');
 
 Route::post('products/filterproducts', [App\Http\Controllers\ProductController::class, 'filterproducts'])->name('filterproducts');
 

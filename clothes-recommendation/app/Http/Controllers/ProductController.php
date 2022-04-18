@@ -9,14 +9,21 @@ use App\Models\Product;
 class ProductController extends Controller
 {
     //
-    public function index()
-    {
+    public function index(){
         $filters = Product::select('name', 'type')->distinct('type')->get();
         $sizes = Product::select('size')->distinct()->get();
         $colors = Product::select('color')->distinct()->get();
         $products = DB::table('products')->get();
         //dd($products);
         return view('products.products', compact('products', 'filters', 'sizes', 'colors'));
+    }
+
+    public function productdetails($id){
+        $products = DB::table('products')
+                        ->where('products.id', $id)
+                        ->get();
+        //dd($products);
+        return view('products.productdetails', compact('products'));
     }
 
     public function filterproducts(Request $request){
