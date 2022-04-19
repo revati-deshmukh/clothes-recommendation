@@ -23,6 +23,7 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 Route::get('products', [App\Http\Controllers\ProductController::class, 'index'])->name('products');
 Route::get('products/{id}', [App\Http\Controllers\ProductController::class, 'productdetails'])->name('productdetails');
+Route::get('addtobag/{id}', [App\Http\Controllers\ProductController::class, 'addtobag'])->name('addtobag');
 
 Route::post('products/filterproducts', [App\Http\Controllers\ProductController::class, 'filterproducts'])->name('filterproducts');
 

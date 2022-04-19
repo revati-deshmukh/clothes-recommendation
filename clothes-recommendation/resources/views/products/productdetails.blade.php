@@ -6,7 +6,7 @@
 
     .products img {
         max-width: 100%;
-        height: 400px;
+        height: 85%;
         width: 100%;
     }
 
@@ -40,6 +40,13 @@
     .quantity-default{
       color: #3ba529;
     }
+
+    .addtobag {
+        color: #fff !important;
+        background: #4a782e !important;
+        margin: 1rem;
+        padding: 1rem;
+    }
 </style>
 
 @extends('layouts.app')
@@ -52,13 +59,20 @@
         </div>
         <div class="product-info">
             <h1 class="product-name">{{ $products[0]->name }}</h1>
-            <p class="product-description">{!! $products[0]->description !!}</p>
+            <p class="product-description">{!! $products[0]->product_details !!}</p>
             <h6 class="product-amount"><strong>&#8377; {{ $products[0]->selling_price }}</strong></h6>
             @if($products[0]->quantity > 1)
                 <span class="quantity-default">In stock</span>
             @elseif($products[0]->quantity == 1)
                 <span class="quantity-warning">Only 1 left... Hurry up!</span>
             @endif
+
+            <div class="quantity">
+                <a class="btn btn-block addtobag" href="{{ route('addtobag', $products[0]->id) }}">Add To Bag</a>
+                <!-- <button><i class="fa fa-minus" aria-hidden="true"></i></button>
+                <label>1</label>
+                <button><i class="fa fa-plus" aria-hidden="true"></i></button> -->
+            </div>
         </div>
     </section>
 </div>

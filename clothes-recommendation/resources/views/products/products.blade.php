@@ -215,7 +215,7 @@
             </div>
             <div class="product-info">
                 <h4 class="product-name">{{ $product->name }}</h4>
-                <p class="product-description">{{ $product->description }}</p>
+                <p class="product-description">{!! $product->description !!}</p>
                 <h6 class="product-amount"><strong>&#8377; {{ $product->selling_price }}</strong></h6>
                 @if($product->quantity > 1)
                   <span class="quantity-default">In stock</span>
