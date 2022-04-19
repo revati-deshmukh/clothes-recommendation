@@ -59,4 +59,12 @@ class ProductController extends Controller
         $colors = Product::select('color')->distinct()->get();
         return view('products.products', compact('products', 'filters', 'sizes', 'colors'));
     }
+
+    public function addtobag($id){
+        $products = DB::table('products')
+                        ->where('products.id', $id)
+                        ->get();
+
+        return view('products.cart', compact('products'));
+    }
 }
