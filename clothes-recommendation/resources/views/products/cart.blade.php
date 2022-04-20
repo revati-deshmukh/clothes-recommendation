@@ -3,6 +3,9 @@
         float: right;
         background: #1f8d22 !important;
     }
+    .table-responsive {
+        max-height:300px;
+    }
 </style>
 @extends('layouts.app')
 
@@ -20,14 +23,25 @@
             </tr>
         </thead>
         <tbody>
+            <?php $total = 0 ?>
+            @for ($i = 0; $i < count($products); $i++)
             <tr>
-                @foreach($products as $product)
-                <td><img src="{{ $product->thumbnail }}" alt="palazzo-top-set1"/></td>
-                <td> {{ $product->name }} </td>
-                <td>&#8377; {{ $product->selling_price }} </td>
+                @foreach($products[$i] as $product)
+                <td><img src="{!! $product['thumbnail'] !!}" alt="{{ $product['name'] }}"/></td>
+                <td> {{ $product['name'] }} </td>
+                <td>&#8377; {{ $product['selling_price'] }} </td>
                 <td> 1 </td>
-                <td>&#8377; {{ $product->selling_price }}</td>
+                <td>&#8377; {{ $product['selling_price'] }}</td>
+                <?php $total = $total + $product['selling_price'] ?>
                 @endforeach
+            </tr>
+            @endfor
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td><strong>Total</strong></td>
+                <td><strong>&#8377; {{ $total }}</strong></td>
             </tr>
         </tbody>
     </table>

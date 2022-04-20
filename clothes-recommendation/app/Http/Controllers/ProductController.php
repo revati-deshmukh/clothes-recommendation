@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\Product;
+use Illuminate\Support\Facades\Storage;
 
 class ProductController extends Controller
 {
@@ -64,7 +65,14 @@ class ProductController extends Controller
         $products = DB::table('products')
                         ->where('products.id', $id)
                         ->get();
-
+        
+        Storage::disk('public')->append('bag.json', json_encode($products));
+        $exists = Storage::disk('public')->exists('bag.json');
+        if($exists){
+            $path = storage_path() . "/app/public/bag.json";
+            $products = json_decode(("[" . preg_replace("/\n+/",",",file_get_contents($path)) . "]"), true); 
+        }
+        //dd($products);
         return view('products.cart', compact('products'));
     }
 }
