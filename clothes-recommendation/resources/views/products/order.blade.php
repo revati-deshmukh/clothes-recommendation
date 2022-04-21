@@ -13,7 +13,7 @@
                     <p>We are looking forward to celebrate all your important events with our products.</p>
                 </div>
                 <div class="card-footer text-end">
-                    <a href="{{route('products')}}">Want to newly launched products?</a>
+                    <a href="{{route('products')}}">Want to see newly launched products?</a>
                 </div>
             </div>
             

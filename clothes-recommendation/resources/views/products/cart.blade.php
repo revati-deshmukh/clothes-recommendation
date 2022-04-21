@@ -1,17 +1,28 @@
 <style>
     .shopping {
-        float: right;
         background: #1f8d22 !important;
     }
+
     .table-responsive {
         max-height:300px;
+    }
+
+    .order {
+        background: #edb332 !important;
+        border-color: #edb332 !important;
+    }
+
+    .action-buttons {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
     }
 </style>
 @extends('layouts.app')
 
 @section('content')
 <div class="container">
-    <h1>Item Summary</h1>
+    <h2>Item Summary</h2>
     <table class="table">
         <thead class="thead-light">
             <tr>
@@ -45,8 +56,9 @@
             </tr>
         </tbody>
     </table>
-    <div>
+    <div class="action-buttons">
         <a class="btn btn-success btn-lg shopping" href="{{ route('products') }}">Continue Shopping</a>
+        <a class="btn btn-success btn-lg order" href="{{ route('order') }}">Order Now</a>
     </div>
 </div>
 @endsection
