@@ -17,7 +17,7 @@
                     {{ __('You are logged in!') }}
                 </div>
                 <div class="card-footer">
-                    <a href="{{route('products')}}">Want to newly launched products?</a>
+                    <a href="{{route('products')}}">Want to see newly launched products?</a>
                 </div>
             </div>
             

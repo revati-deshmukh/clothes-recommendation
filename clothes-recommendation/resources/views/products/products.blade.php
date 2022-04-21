@@ -23,6 +23,7 @@
     .collection-sort {
       /*display: flex; */
       flex-direction: row;
+      margin-top: 0.25em;
     }
 
     .collection-sort label {
@@ -154,7 +155,7 @@
 @section('content')
 <div class="container">
     <div class="product-filter">
-        <h1>Clothes</h1>       
+        <h1>Ethnic Wear</h1>       
         <div class="filter-section">
             <button class="btn btn-success" id="toggleFilterBtn" onclick=toggleFilters()>Apply Filters?</button>
             <div id="filter" class="collection-sort">
@@ -198,7 +199,7 @@
     <div>
         <div class="sort">
           <div class="collection-sort"> 
-              <a class="btn btn-light active" id="featured" href="{{ route('products') }}">Featured</a>
+              <a class="btn btn-light" id="featured" href="{{ route('products') }}">Featured</a>
               <a class="btn btn-light" id="lowhigh" href="{{ route('sortlowtohigh') }}">Price Low-High</a>
               <a class="btn btn-light" id="highlow" href="{{ route('sorthightolow') }}">Price High-Low</a>
           </div>
@@ -239,6 +240,22 @@
           document.getElementById("toggleFilterBtn").style.display = "none";
           //document.getElementById("toggleFilterBtn").innerHTML = "Remove Filters";
         }
+      }
+
+      urlSplit = window.location.pathname.split('/');
+      
+      if(urlSplit[2] == 'sortlowtohigh'){
+        document.getElementById("lowhigh").classList.add("active");
+        document.getElementById("highlow").removeClass = "active";
+        document.getElementById("featured").removeClass = "active";
+      } else if(urlSplit[2] == 'sorthightolow'){
+        document.getElementById("highlow").classList.add("active");
+        document.getElementById("lowhigh").removeClass = "active";
+        document.getElementById("featured").removeClass = "active";
+      } else {
+        document.getElementById("featured").classList.add("active");
+        document.getElementById("lowhigh").removeClass = "active";
+        document.getElementById("highlow").removeClass = "active";
       }
     </script>
 </div>
